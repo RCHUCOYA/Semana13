@@ -1,0 +1,81 @@
+@Semana13_HostAddress = http://localhost:5239
+
+### ---------- Grade: CRUD ----------
+
+### Listar grados activos
+GET {{Semana13_HostAddress}}/api/grades
+Accept: application/json
+
+### Obtener grado por ID (404 si está eliminado)
+GET {{Semana13_HostAddress}}/api/grades/1
+Accept: application/json
+
+### Crear grado
+POST {{Semana13_HostAddress}}/api/grades
+Content-Type: application/json
+
+{
+  "name": "Tercero",
+  "description": "Tercer grado"
+}
+
+### Actualizar grado (404 si está eliminado)
+PUT {{Semana13_HostAddress}}/api/grades/3
+Content-Type: application/json
+
+{
+  "name": "Tercero A",
+  "description": "Tercer grado, sección A"
+}
+
+### Eliminar grado (lógico: IsDeleted = 1)
+DELETE {{Semana13_HostAddress}}/api/grades/3
+
+### ---------- Course: CRUD ----------
+
+### Listar cursos activos
+GET {{Semana13_HostAddress}}/api/courses
+Accept: application/json
+
+### Obtener curso por ID (404 si está eliminado)
+GET {{Semana13_HostAddress}}/api/courses/1
+Accept: application/json
+
+### Crear curso
+POST {{Semana13_HostAddress}}/api/courses
+Content-Type: application/json
+
+{
+  "name": "Quimica",
+  "credit": 3
+}
+
+### Actualizar curso (404 si está eliminado)
+PUT {{Semana13_HostAddress}}/api/courses/6
+Content-Type: application/json
+
+{
+  "name": "Quimica General",
+  "credit": 4
+}
+
+### Eliminar curso (lógico: IsDeleted = 1)
+DELETE {{Semana13_HostAddress}}/api/courses/6
+
+### ---------- Búsquedas ----------
+
+### 1. Estudiantes por nombre, apellido o email (apellido DESC)
+GET {{Semana13_HostAddress}}/api/students?search=ana
+Accept: application/json
+
+### 2. Estudiantes por nombre y grado (curso activo mayor DESC, sin curso al final)
+GET {{Semana13_HostAddress}}/api/students/by-grade?name=a&gradeId=1
+Accept: application/json
+
+### 3. Matrículas por nombre de curso (curso ASC, apellido ASC)
+GET {{Semana13_HostAddress}}/api/enrollments/by-course?courseName=mat
+Accept: application/json
+
+### 4. Matrículas por grado (curso ASC, apellido ASC)
+GET {{Semana13_HostAddress}}/api/enrollments/by-grade?gradeId=1
+Accept: application/json
